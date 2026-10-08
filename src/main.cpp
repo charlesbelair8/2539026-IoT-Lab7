@@ -169,9 +169,16 @@ void handleRoot()
 void handleLEDOn()
 { 
   Serial.println("LED ON Route Accessed");
-	digitalWrite(ledPin, HIGH);
-	  server.sendHeader("Location", "/" );
-	  server.send(303);
+	  digitalWrite(ledPin, HIGH);
+	    server.sendHeader("Location", "/" );
+	    server.send(303);
+}
+void handleLEDOff()
+{
+  Serial.println("LED OFF Route Accessed");
+	  digitalWrite( ledPin, LOW );
+	    server.sendHeader("Location", "/" );
+	    server.send(303);
 }
 
 
