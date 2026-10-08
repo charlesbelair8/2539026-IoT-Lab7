@@ -161,10 +161,11 @@ IP Address: 192.168.4.1
 
 void handleRoot()
 {
+  temperature = bmp.readTemperature();
   String page = webpage;
   page.replace("TEMP_PLACEHOLDER", String(temperature));
   server.send(200, "text/html", page);
-  }
+}
 
 void handleLEDOn()
 { 
