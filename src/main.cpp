@@ -181,7 +181,6 @@ void handleLEDOff()
 	    server.send(303);
 }
 
-
 void setup()
 {
   Serial.begin(115200);
@@ -201,7 +200,11 @@ void setup()
   WiFi.softAP(ssid, password);
     Serial.print("IP Address: ");
     Serial.println(WiFi.softAPIP());
-  
+
+  server.on( "/", handleRoot );
+  server.on("/on", handleLEDOn);
+  server.on("/off", handleLEDOff);
+
   server.begin();
     Serial.println("Web Server Started");
 
@@ -214,9 +217,6 @@ void setup()
 	// Server start
 }
 void loop(){
-   temperature = bmp.readTemperature();
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-    Serial.println(" C");
-      delay(1000);
+   server.handleClient();
+   // Handles client requests
 }
